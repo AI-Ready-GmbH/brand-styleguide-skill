@@ -1,0 +1,92 @@
+<!doctype html>
+<!--
+  Bildtafel für eine Stilrichtung (P5, references/differenzierung.md).
+  So benutzt du sie:
+  1. Kopiere diese Datei je Richtung nach <lauf>/arbeit/04-richtungen/<name>.html.
+  2. Erzeuge die Variablen der Richtung: python3 scripts/tokens.py <lauf>/arbeit/04-richtungen/<name>.tokens.json --nur-css
+     (ergibt <name>.css) und trag den Dateinamen unten bei RICHTUNG_CSS ein.
+  3. Schreib das Signatur-Element der Richtung in <name>.signatur.css (nur mit var(--m-…)), trag es bei SIGNATUR_CSS ein.
+  4. Ersetze alle {{…}} durch Inhalte der Marke (echte Sätze aus dem Faktenblatt, keine Blindtexte). Gleicher Inhalt
+     in allen Richtungen, damit man nur die Gestaltung vergleicht.
+  5. Rendern: python3 scripts/render.py png <lauf>/arbeit/04-richtungen/<name>.html <lauf>/arbeit/04-richtungen/<name>.png --breite 1600 --hoehe 1000
+  Kopiere vorher assets/beispiele/basis.css in denselben Ordner.
+-->
+<html lang="de" data-modus="{{MODUS}}">
+<head>
+<meta charset="utf-8">
+<title>Richtung {{NAME}}</title>
+<link rel="stylesheet" href="{{RICHTUNG_CSS}}">
+<link rel="stylesheet" href="basis.css">
+<link rel="stylesheet" href="{{SIGNATUR_CSS}}">
+<style>
+  /* Raster der Tafel (Mechanik). Werte nur aus Tokens. */
+  body { width: 1600px; height: 1000px; overflow: hidden; }
+  .tafel { display: grid; grid-template-columns: 1.35fr 1fr; gap: 40px; padding: 48px 56px; height: 100%; }
+  .kopf { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--m-farbe-linie); padding-bottom: 16px; }
+  .kopf p { margin: 0; max-width: 70ch; color: var(--m-farbe-text-leise); }
+  .hero { display: flex; flex-direction: column; gap: 20px; justify-content: center; }
+  .knoepfe { display: flex; gap: 12px; }
+  .rechts { display: grid; gap: 20px; align-content: start; }
+  .palette { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+  .palette div { height: 56px; border: 1px solid var(--m-farbe-linie); border-radius: var(--m-radius-steuerung); }
+  .palette span { display: block; margin-top: 4px; }
+  .skala { display: grid; gap: 6px; }
+  .formen { display: flex; gap: 16px; align-items: center; }
+  .formen div { width: 72px; height: 52px; border: 1.5px solid var(--m-farbe-text); }
+  .fuss { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; border-top: 1px solid var(--m-farbe-linie); padding-top: 16px; }
+  .achsen { width: 100%; border-collapse: collapse; }
+  .achsen td { padding: 2px 8px 2px 0; }
+</style>
+</head>
+<body>
+<main class="tafel">
+  <header class="kopf">
+    <div><span class="label">Richtung</span><h1 class="titel-2">{{NAME}}</h1></div>
+    <p class="klein">{{BESCHREIBUNG}}</p>
+  </header>
+
+  <section class="hero signatur">
+    <h2 class="display">{{TITEL}}</h2>
+    <p class="lead">{{LEAD}}</p>
+    <div class="knoepfe">
+      <a class="knopf knopf-primaer" href="#">{{BUTTON}}</a>
+      <a class="knopf knopf-zweit" href="#">{{BUTTON2}}</a>
+    </div>
+  </section>
+
+  <section class="rechts">
+    <article class="karte">
+      <span class="label">{{KARTE_LABEL}}</span>
+      <h3 class="titel-3">{{KARTE_TITEL}}</h3>
+      <p>{{KARTE_TEXT}}</p>
+      <a class="weiter" href="#">{{KARTE_LINK}}</a>
+    </article>
+    <div>
+      <div class="palette">
+        <div style="background:var(--m-farbe-grund)"></div>
+        <div style="background:var(--m-farbe-flaeche)"></div>
+        <div style="background:var(--m-farbe-text)"></div>
+        <div style="background:var(--m-farbe-akzent)"></div>
+        <div style="background:var(--m-farbe-handlung)"></div>
+        <div style="background:var(--m-farbe-flaeche-akzent, var(--m-farbe-flaeche))"></div>
+      </div>
+    </div>
+    <div class="skala">
+      <span class="titel-1">Aa {{SCHRIFT_TITEL}}</span>
+      <span>{{SCHRIFT_TEXT}} · Fließtext</span>
+      <span class="label">Label · {{SCHRIFT_TEXT}}</span>
+    </div>
+    <div class="formen">
+      <div style="border-radius:var(--m-radius-steuerung)"></div>
+      <div style="border-radius:var(--m-radius-karte)"></div>
+      <div style="border-radius:var(--m-radius-pille)"></div>
+    </div>
+  </section>
+
+  <footer class="fuss klein">
+    <div><strong>Signatur:</strong> {{SIGNATUR}}<br><strong>Bewegung:</strong> {{BEWEGUNG}}</div>
+    <table class="achsen">{{ACHSEN}}</table>
+  </footer>
+</main>
+</body>
+</html>

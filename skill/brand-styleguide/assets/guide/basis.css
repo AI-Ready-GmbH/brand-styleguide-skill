@@ -1,0 +1,97 @@
+/* Mechanik des Guides: Seitenformat, Umbrüche, Raster der Tafeln. KEINE Gestaltung der Marke.
+   Mindestgröße für Text im Guide: 8 pt (kapitel.md, Abschnitt 6).
+   Farben, Schriften, Formen kommen aus tokens.css (--m-…) und guide/marke.css (vom Lauf geschrieben).
+   Wird von scripts/guide_bauen.py neben guide.html kopiert. */
+
+@page { size: 297mm 210mm; margin: 16mm 18mm 16mm; }
+@page { @bottom-right { content: counter(page); font: 8pt system-ui, sans-serif; color: #666; } }
+@page cover { margin: 0; @bottom-right { content: none; } }
+@page kolophon { @bottom-right { content: none; } }
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body {
+  margin: 0;
+  background: var(--m-farbe-grund);
+  color: var(--m-farbe-text);
+  font-family: var(--m-schrift-text);
+  font-size: 10pt;
+  line-height: 1.5;
+  hyphens: auto;
+  text-wrap: pretty;
+}
+
+/* ---------- Seiten ---------- */
+.seite { break-before: page; position: relative; }
+.seite:first-of-type { break-before: auto; }
+.cover { page: cover; width: 297mm; height: 210mm; overflow: hidden; break-after: page; }
+.kolophon { page: kolophon; }
+.laufkopf { display: none; }
+
+/* Bildschirmansicht: Seiten als Blätter */
+@media screen {
+  body { background: color-mix(in srgb, var(--m-farbe-text) 12%, var(--m-farbe-grund)); padding: 24px 0; }
+  .seite { width: 297mm; min-height: 210mm; margin: 0 auto 24px; padding: 16mm 18mm; background: var(--m-farbe-grund); }
+  .cover { padding: 0; }
+}
+
+/* ---------- Kapitel ---------- */
+.kapitel { break-after: avoid; margin-bottom: 8mm; }
+h2, h3, h4 { break-after: avoid; font-family: var(--m-schrift-titel); }
+h3 { margin: 7mm 0 2mm; }
+h4 { margin: 5mm 0 2mm; }
+p, li { orphans: 3; widows: 3; max-width: 72ch; }
+figure, .muster, .farbe, pre, blockquote, tr { break-inside: avoid; }
+/* Tabellen dürfen umbrechen (Kopf wiederholt sich), sonst entstehen halbleere Seiten */
+.bild img, .beispiel img { max-height: 150mm; width: auto; max-width: 100%; margin: 0 auto; }
+img { max-width: 100%; height: auto; display: block; }
+
+/* ---------- Tabellen ---------- */
+table { width: 100%; border-collapse: collapse; margin: 2mm 0 5mm; font-size: 8.6pt; }
+thead { display: table-header-group; }
+th { text-align: left; vertical-align: bottom; padding: 1.6mm 3mm 1.6mm 0; border-bottom: 1.2pt solid var(--m-farbe-text); }
+td { vertical-align: top; padding: 1.6mm 3mm 1.6mm 0; border-bottom: 0.5pt solid var(--m-farbe-linie); }
+
+/* ---------- Verweise und Markierungen ---------- */
+sup.beleg { font-size: 8pt; line-height: 0; margin-left: 0.15em; }
+sup.beleg a { color: var(--m-farbe-text-leise); text-decoration: none; }
+.vorlaeufig { display: inline-block; padding: 0 0.5em; border: 1pt dashed var(--m-farbe-fehler); color: var(--m-farbe-fehler); font-size: max(8pt, 0.8em); border-radius: 3px; }
+.befund { color: var(--m-farbe-fehler); font-weight: 600; }
+.leise { color: var(--m-farbe-text-leise); }
+.kasten { display: inline-block; width: 0.9em; height: 0.9em; border: 1pt solid var(--m-farbe-linie-stark); margin-right: 0.5em; vertical-align: -0.1em; }
+html[data-entwurf] body::after {
+  content: "Entwurf"; position: fixed; right: 12mm; top: 8mm; font: 600 9pt system-ui, sans-serif;
+  color: var(--m-farbe-fehler); border: 1pt solid var(--m-farbe-fehler); padding: 1mm 3mm;
+}
+
+/* ---------- Inhalt ---------- */
+.inhaltsliste { list-style: none; padding: 0; columns: 2; column-gap: 12mm; }
+.inhaltsliste li { break-inside: avoid; border-bottom: 0.5pt solid var(--m-farbe-linie); }
+.inhaltsliste a { display: flex; gap: 4mm; padding: 2mm 0; color: inherit; text-decoration: none; }
+.inhaltsliste .nr { min-width: 8mm; }
+
+/* ---------- Tafeln (Raster, keine Optik) ---------- */
+.tafel { margin: 3mm 0 6mm; }
+.tafel-titel { margin: 4mm 0 2mm; }
+.farben { display: grid; grid-template-columns: repeat(6, 1fr); gap: 3mm; }
+.farben-rollen { grid-template-columns: repeat(7, 1fr); }
+.farbe { margin: 0; font-size: 8pt; line-height: 1.35; }
+.farbe .feld { display: block; height: 16mm; border: 0.5pt solid var(--m-farbe-linie); }
+.farbe figcaption { display: flex; flex-direction: column; padding-top: 1.5mm; }
+.schriftmuster .muster { display: grid; grid-template-columns: 42mm 1fr; gap: 6mm; padding: 2.5mm 0; border-bottom: 0.5pt solid var(--m-farbe-linie); align-items: baseline; }
+.muster-meta { display: flex; flex-direction: column; font-size: 8pt; color: var(--m-farbe-text-leise); }
+.muster-meta strong { color: var(--m-farbe-text); }
+.muster-text { overflow-wrap: anywhere; }
+.abstaende .abstand { display: flex; align-items: center; gap: 4mm; font-size: 8pt; margin: 1.2mm 0; }
+.abstaende .balken { display: block; height: 4mm; background: var(--m-farbe-akzent); }
+.radien { display: flex; gap: 8mm; flex-wrap: wrap; }
+.radius { margin: 0; font-size: 8pt; }
+.radius .form { display: block; width: 22mm; height: 16mm; border: 1.2pt solid var(--m-farbe-text); margin-bottom: 1.5mm; }
+.bild, .beispiel, .logo-feld { margin: 3mm 0 6mm; }
+.bild figcaption, .logo-feld figcaption { font-size: 8pt; color: var(--m-farbe-text-leise); padding-top: 1.5mm; }
+.logo-feld { padding: 10mm; display: inline-flex; flex-direction: column; align-items: flex-start; min-width: 70mm; }
+.logo-feld img { max-height: 18mm; width: auto; }
+.beispiel img { border: 0.5pt solid var(--m-farbe-linie); }
+
+/* ---------- Anhang ---------- */
+.anhang table { font-size: 8pt; }

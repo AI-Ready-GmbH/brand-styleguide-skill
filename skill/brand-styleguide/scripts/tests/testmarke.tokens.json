@@ -1,0 +1,80 @@
+{
+  "$marke": {
+    "name": "Kieselwerk (erfundene Testmarke, nur für Skript-Tests, nie als Vorlage verwenden)",
+    "version": "0.1",
+    "modi": ["hell", "dunkel"],
+    "standardmodus": "hell",
+    "folgt_system": true,
+    "kontrastpaare": [["farbe.rolle.text", "farbe.rolle.flaeche-akzent", "text"]],
+    "achsen_ist": { "sachlich_verspielt": { "stufe": 2, "grund": "Test" } }
+  },
+  "farbe": {
+    "basis": {
+      "kalk": { "$type": "color", "$value": "#F3F0EA", "$description": "Grundfläche, F1" },
+      "papier": { "$type": "color", "$value": "#FFFFFF", "$description": "Fläche, F2" },
+      "schiefer": { "$type": "color", "$value": "#22262B", "$description": "Text, F3" },
+      "nacht": { "$type": "color", "$value": "#121417", "$description": "Grund dunkel, W1" },
+      "moos": { "$type": "color", "$value": "#4F7A3A", "$description": "Akzent, F5" },
+      "moos-hell": { "$type": "color", "$value": "#8DBB73", "$description": "Akzent auf dunkel, W2" },
+      "rost": { "$type": "color", "$value": "#B4471F", "$description": "Handlung, F6" },
+      "rost-tief": { "$type": "color", "$value": "#963A18", "$description": "Handlung Hover, W3" },
+      "fehlerrot": { "$type": "color", "$value": "#B3261E", "$description": "Fehler" }
+    },
+    "rolle": {
+      "grund": { "$type": "color", "$value": "{farbe.basis.kalk}", "$extensions": { "modi": { "dunkel": "{farbe.basis.nacht}" } } },
+      "flaeche": { "$type": "color", "$value": "{farbe.basis.papier}", "$extensions": { "modi": { "dunkel": "#1B1E22" } } },
+      "flaeche-akzent": { "$type": "color", "$value": "color-mix(in srgb, {farbe.basis.moos} 12%, {farbe.basis.papier})", "$extensions": { "modi": { "dunkel": "color-mix(in srgb, {farbe.basis.moos-hell} 14%, {farbe.basis.nacht})" } } },
+      "text": { "$type": "color", "$value": "{farbe.basis.schiefer}", "$extensions": { "modi": { "dunkel": "#EDEAE4" } } },
+      "text-leise": { "$type": "color", "$value": "color-mix(in srgb, {farbe.basis.schiefer} 68%, transparent)", "$extensions": { "modi": { "dunkel": "color-mix(in srgb, #EDEAE4 66%, transparent)" } } },
+      "linie": { "$type": "color", "$value": "color-mix(in srgb, {farbe.basis.schiefer} 10%, transparent)", "$extensions": { "modi": { "dunkel": "color-mix(in srgb, #EDEAE4 12%, transparent)" } } },
+      "linie-stark": { "$type": "color", "$value": "color-mix(in srgb, {farbe.basis.schiefer} 55%, transparent)", "$extensions": { "modi": { "dunkel": "color-mix(in srgb, #EDEAE4 50%, transparent)" } } },
+      "akzent": { "$type": "color", "$value": "{farbe.basis.moos}", "$extensions": { "modi": { "dunkel": "{farbe.basis.moos-hell}" } } },
+      "akzent-text": { "$type": "color", "$value": "{farbe.basis.moos}", "$extensions": { "modi": { "dunkel": "{farbe.basis.moos-hell}", "druck": "#3E6230" } } },
+      "handlung": { "$type": "color", "$value": "{farbe.basis.rost}" },
+      "handlung-hover": { "$type": "color", "$value": "{farbe.basis.rost-tief}" },
+      "handlung-text": { "$type": "color", "$value": "{farbe.basis.papier}" },
+      "fokus": { "$type": "color", "$value": "{farbe.basis.moos}", "$extensions": { "modi": { "dunkel": "{farbe.basis.moos-hell}" } } },
+      "fehler": { "$type": "color", "$value": "{farbe.basis.fehlerrot}", "$extensions": { "modi": { "dunkel": "#F2A08F" } } }
+    }
+  },
+  "schrift": {
+    "familie": {
+      "titel": { "$type": "fontFamily", "$value": ["Fraunces", "Georgia", "serif"], "$extensions": { "lizenz": "OFL", "quelle": "F7" } },
+      "text": { "$type": "fontFamily", "$value": ["Source Sans 3", "system-ui", "sans-serif"], "$extensions": { "lizenz": "OFL", "quelle": "F8" } }
+    },
+    "web": {
+      "display": { "$type": "typography", "$value": { "fontFamily": "{schrift.familie.titel}", "fontSize": "clamp(2.5rem, 6vw, 4.5rem)", "fontWeight": 600, "lineHeight": 1.05, "letterSpacing": "-0.01em" } },
+      "titel-1": { "$type": "typography", "$value": { "fontFamily": "{schrift.familie.titel}", "fontSize": "clamp(2rem, 4vw, 3rem)", "fontWeight": 600, "lineHeight": 1.1 } },
+      "titel-2": { "$type": "typography", "$value": { "fontFamily": "{schrift.familie.titel}", "fontSize": "1.5rem", "fontWeight": 600, "lineHeight": 1.2 } },
+      "lead": { "$type": "typography", "$value": { "fontFamily": "{schrift.familie.text}", "fontSize": "1.25rem", "fontWeight": 400, "lineHeight": 1.5 } },
+      "fliesstext": { "$type": "typography", "$value": { "fontFamily": "{schrift.familie.text}", "fontSize": "1.0625rem", "fontWeight": 400, "lineHeight": 1.65 } },
+      "klein": { "$type": "typography", "$value": { "fontFamily": "{schrift.familie.text}", "fontSize": "0.875rem", "fontWeight": 400, "lineHeight": 1.5 } },
+      "label": { "$type": "typography", "$value": { "fontFamily": "{schrift.familie.text}", "fontSize": "0.75rem", "fontWeight": 600, "lineHeight": 1.4, "letterSpacing": "0.08em" }, "$extensions": { "versalien": true } }
+    },
+    "druck": {
+      "titel-1": { "$type": "typography", "$value": { "fontFamily": "{schrift.familie.titel}", "fontSize": "24pt", "fontWeight": 600, "lineHeight": 1.1 } },
+      "fliesstext": { "$type": "typography", "$value": { "fontFamily": "{schrift.familie.text}", "fontSize": "10pt", "fontWeight": 400, "lineHeight": 1.45 } }
+    }
+  },
+  "abstand": {
+    "1": { "$type": "dimension", "$value": "4px" }, "2": { "$type": "dimension", "$value": "8px" },
+    "3": { "$type": "dimension", "$value": "16px" }, "4": { "$type": "dimension", "$value": "24px" },
+    "5": { "$type": "dimension", "$value": "40px" }, "6": { "$type": "dimension", "$value": "64px" },
+    "7": { "$type": "dimension", "$value": "104px" }
+  },
+  "radius": {
+    "steuerung": { "$type": "dimension", "$value": "2px" },
+    "karte": { "$type": "dimension", "$value": "2px" },
+    "pille": { "$type": "dimension", "$value": "999px" }
+  },
+  "bewegung": {
+    "dauer": { "kurz": { "$type": "duration", "$value": "120ms" }, "mittel": { "$type": "duration", "$value": "200ms" }, "lang": { "$type": "duration", "$value": "320ms" } },
+    "kurve": { "standard": { "$type": "cubicBezier", "$value": "cubic-bezier(0.3, 0, 0.2, 1)" } }
+  },
+  "layout": {
+    "container": { "$type": "dimension", "$value": "1200px" },
+    "rand": { "$type": "dimension", "$value": "24px" },
+    "lesebreite": { "$type": "dimension", "$value": "68ch" },
+    "breakpoints": { "$type": "other", "$value": { "md": "768px", "lg": "1100px" } }
+  }
+}

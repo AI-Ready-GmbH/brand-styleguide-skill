@@ -1,0 +1,13 @@
+schema_version: "1.1"
+name: ai-ready-blind
+expected_outcome: |
+  Ein vollständiger Lauf unter brand-guides/ai-ready/: Faktenblatt mit Fundstellen, Markenkern, zwei bis drei
+  Stilrichtungen als Bild, Tokens mit Kontrastprüfung, Guide als PDF im Layout der Marke, DESIGN.md und PRODUCT.md,
+  Bausteine für Next.js/Tailwind/Sanity, Anwendungsbeispiele und ein Prüfbericht mit Blindtest.
+  Inhaltlich deckt sich der Guide in den Kernentscheidungen mit dem echten AI-READY-Guide v1.4 (den der Lauf nicht
+  kennt): Nachtblau als Grund, Warmweiß als Text, Gold als Akzent mit Bedeutung, Orange nur für die primäre Handlung,
+  Inter Tight und Inter als Schriften. Die Fremdschriften im alten Cheat-Sheet und das alte Logo im Mockup werden als
+  Widersprüche vorgelegt, Gold als Schrift auf Weiß als Kontrastproblem erkannt und mit einer dunkleren Goldfassung gelöst.
+  Weil der User Autopilot verlangt, sind alle nicht entschiedenen Punkte sichtbar als vorläufig markiert.
+context:
+  scaffold_script: place-files.sh

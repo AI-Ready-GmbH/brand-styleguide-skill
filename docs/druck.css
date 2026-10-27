@@ -1,0 +1,30 @@
+/* Druck-CSS für Konzept-Dokumente (A4 hoch). Schriften: Inter (OFL) aus dem Website-Repo, nur gelesen. */
+@font-face { font-family: 'Inter'; font-weight: 400; src: url('file:///Users/m.kleinsorg/Documents/Building/AI%20Ready%20Campus/Website%20Sanity/website/lib/og/schriften/Inter-Regular.ttf'); }
+@font-face { font-family: 'Inter'; font-weight: 600; src: url('file:///Users/m.kleinsorg/Documents/Building/AI%20Ready%20Campus/Website%20Sanity/website/lib/og/schriften/Inter-SemiBold.ttf'); }
+@font-face { font-family: 'Inter Tight'; font-weight: 800; src: url('file:///Users/m.kleinsorg/Documents/Building/AI%20Ready%20Campus/Website%20Sanity/website/lib/og/schriften/InterTight-ExtraBold.ttf'); }
+
+:root { --nacht: #0B0F14; --text: #1B1F24; --mute: #5B6068; --linie: #E4E1D8; --gold-ink: #8A660F; --gold: #B0842A; --papier-2: #F6F3EC; }
+@page { size: A4; margin: 16mm 16mm 18mm; @bottom-left { content: 'brand-styleguide · Konzept 0.2 · AI READY'; font-family: 'Inter', sans-serif; font-size: 7.5pt; color: #5B6068; } @bottom-right { content: counter(page); font-family: 'Inter', sans-serif; font-size: 7.5pt; color: #8A660F; } }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { font-family: 'Inter', system-ui, sans-serif; font-size: 9.6pt; line-height: 1.5; color: var(--text); max-width: none; margin: 0; padding: 0; hyphens: auto; }
+h1, h2, h3 { font-family: 'Inter Tight', 'Inter', sans-serif; font-weight: 800; color: var(--nacht); letter-spacing: -0.015em; line-height: 1.15; break-after: avoid; }
+h1 { font-size: 24pt; margin: 0 0 4mm; }
+h2 { font-size: 15pt; margin: 9mm 0 3mm; padding-top: 3mm; border-top: 2px solid var(--gold); }
+h3 { font-size: 11.5pt; margin: 6mm 0 2mm; }
+p, li { orphans: 3; widows: 3; }
+p { margin: 0 0 2.4mm; }
+ul, ol { margin: 0 0 3mm; padding-left: 5mm; }
+li { margin-bottom: 1mm; }
+strong { font-weight: 600; color: var(--nacht); }
+a { color: var(--gold-ink); text-decoration: none; }
+hr { display: none; }
+blockquote { margin: 0 0 5mm; padding: 3mm 4mm; background: var(--papier-2); border-left: 2px solid var(--gold); color: var(--mute); }
+blockquote p { margin: 0 0 1mm; }
+table { width: 100%; border-collapse: collapse; margin: 1mm 0 4mm; font-size: 8.4pt; line-height: 1.4; break-inside: auto; }
+thead { display: table-header-group; }
+tr { break-inside: avoid; }
+th { text-align: left; font-weight: 600; font-size: 7.6pt; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gold-ink); border-bottom: 1.5px solid var(--nacht); padding: 1.6mm 2mm 1.6mm 0; vertical-align: bottom; }
+td { border-bottom: 0.6pt solid var(--linie); padding: 1.6mm 2.5mm 1.6mm 0; vertical-align: top; }
+code { font-family: 'SF Mono', Menlo, monospace; font-size: 0.86em; background: var(--papier-2); padding: 0 0.25em; border-radius: 2px; }
+pre { background: var(--papier-2); padding: 3mm 4mm; border-radius: 2mm; font-size: 7.6pt; line-height: 1.45; break-inside: avoid; white-space: pre; overflow: hidden; }
+pre code { background: none; padding: 0; font-size: inherit; }

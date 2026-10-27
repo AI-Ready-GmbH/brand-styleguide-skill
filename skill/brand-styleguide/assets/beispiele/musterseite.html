@@ -1,0 +1,81 @@
+<!doctype html>
+<!--
+  Musterseite Web (Anwendungsbeispiel, P6, references/kapitel.md).
+  1. Kopiere nach <lauf>/beispiele/musterseite.html, dazu assets/beispiele/basis.css nach <lauf>/beispiele/.
+  2. Verlinke ../tokens/tokens.css (steht schon unten) und schreib <lauf>/beispiele/marke.css: Gestaltung der Marke
+     nur mit var(--m-…), inklusive Signatur-Elemente (.signatur) und Seitenmuster aus dem Guide (Kapitel Web).
+  3. Ersetze alle {{…}} durch echte Inhalte der Marke (Faktenblatt), keine Blindtexte. Ändere den Aufbau, wenn das
+     Seitenmuster der Marke anders ist: Die Abschnitte hier sind ein Gerüst, keine Vorgabe.
+  4. Rendern: python3 scripts/render.py png <lauf>/beispiele/musterseite.html <lauf>/beispiele/musterseite.png --breite 1440 --voll
+     Mobil:   … --breite 390 --voll → musterseite-mobil.png · Dunkel: … --modus dunkel → musterseite-dunkel.png
+  5. Blindtest: Kopie mit <html class="blindtest"> (blendet Logo und [data-marke] aus), Texte neutralisieren.
+-->
+<html lang="de" data-modus="{{MODUS}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{MARKE}} · Musterseite</title>
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="basis.css">
+<link rel="stylesheet" href="marke.css">
+<script>if (location.search.includes("blindtest")) document.documentElement.classList.add("blindtest");</script>
+<style>
+  /* Gerüst: Container und Abstände aus den Tokens */
+  .container { max-width: var(--m-layout-container); margin: 0 auto; padding: 0 var(--m-layout-rand); }
+  .kopf { display: flex; justify-content: space-between; align-items: center; min-height: 72px; }
+  .kopf nav { display: flex; gap: var(--m-abstand-4, 24px); }
+  .kopf nav a { color: var(--m-farbe-text); text-decoration: none; }
+  .logo img, .logo svg { height: 32px; width: auto; }
+  section { padding: var(--m-abstand-6, 64px) 0; }
+  .hero { display: grid; gap: var(--m-abstand-4, 24px); max-width: 52rem; }
+  .knoepfe { display: flex; flex-wrap: wrap; gap: var(--m-abstand-3, 16px); }
+  .raster { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: var(--m-abstand-4, 24px); }
+  .zitat { max-width: 48rem; }
+  .zitat blockquote { margin: 0; }
+  .abschluss { text-align: start; display: grid; gap: var(--m-abstand-4, 24px); justify-items: start; }
+  .fuss { border-top: 1px solid var(--m-farbe-linie); padding: var(--m-abstand-5, 40px) 0; }
+</style>
+</head>
+<body>
+<header class="container kopf">
+  <a class="logo" href="#" aria-label="{{MARKE}} Startseite"><img src="{{LOGO}}" alt="{{MARKE}}"></a>
+  <nav aria-label="Hauptnavigation"><a href="#">{{NAV_1}}</a><a href="#">{{NAV_2}}</a><a href="#">{{NAV_3}}</a></nav>
+</header>
+
+<main>
+  <section class="container">
+    <div class="hero signatur">
+      <h1 class="display" data-marke>{{TITEL}}</h1>
+      <p class="lead">{{LEAD}}</p>
+      <div class="knoepfe">
+        <a class="knopf knopf-primaer" href="#">{{BUTTON}}</a>
+        <a class="knopf knopf-zweit" href="#">{{BUTTON2}}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <h2 class="titel-1">{{ABSCHNITT_TITEL}}</h2>
+    <div class="raster">
+      <article class="karte"><h3 class="titel-3">{{KARTE_1_TITEL}}</h3><p>{{KARTE_1_TEXT}}</p><a class="weiter" href="#">{{KARTE_LINK}}</a></article>
+      <article class="karte"><h3 class="titel-3">{{KARTE_2_TITEL}}</h3><p>{{KARTE_2_TEXT}}</p><a class="weiter" href="#">{{KARTE_LINK}}</a></article>
+      <article class="karte"><h3 class="titel-3">{{KARTE_3_TITEL}}</h3><p>{{KARTE_3_TEXT}}</p><a class="weiter" href="#">{{KARTE_LINK}}</a></article>
+    </div>
+  </section>
+
+  <section class="container zitat">
+    <figure class="karte flaeche-akzent">
+      <blockquote class="titel-3">{{ZITAT}}</blockquote>
+      <figcaption class="klein">{{ZITAT_QUELLE}}</figcaption>
+    </figure>
+  </section>
+
+  <section class="container abschluss">
+    <h2 class="titel-1">{{ABSCHLUSS_TITEL}}</h2>
+    <a class="knopf knopf-primaer" href="#">{{BUTTON}}</a>
+  </section>
+</main>
+
+<footer class="fuss"><div class="container klein" data-marke>{{FUSS}}</div></footer>
+</body>
+</html>

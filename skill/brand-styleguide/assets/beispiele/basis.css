@@ -1,0 +1,52 @@
+/* Gerüst für Tafeln und Anwendungsbeispiele: Raster und Zustände, alle Werte aus den Tokens (--m-…).
+   KEINE Gestaltung der Marke: Die markeneigene Datei (marke.css bzw. <richtung>.css) legt fest, wie es aussieht,
+   und gestaltet die Signatur-Elemente (.signatur). Ohne sie sieht alles bewusst roh aus. */
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body {
+  margin: 0;
+  background: var(--m-farbe-grund);
+  color: var(--m-farbe-text);
+  font-family: var(--m-text-fliesstext-familie, var(--m-schrift-text));
+  font-size: var(--m-text-fliesstext-groesse);
+  line-height: var(--m-text-fliesstext-zeilenhoehe);
+}
+img { max-width: 100%; display: block; }
+a { color: var(--m-farbe-akzent-text); }
+
+/* Schriftstufen */
+.display, .titel-1, .titel-2, .titel-3 { margin: 0; text-wrap: balance; }
+.display { font: var(--m-text-display-gewicht) var(--m-text-display-groesse)/var(--m-text-display-zeilenhoehe) var(--m-text-display-familie); letter-spacing: var(--m-text-display-laufweite, normal); }
+.titel-1 { font: var(--m-text-titel-1-gewicht) var(--m-text-titel-1-groesse)/var(--m-text-titel-1-zeilenhoehe) var(--m-text-titel-1-familie); letter-spacing: var(--m-text-titel-1-laufweite, normal); }
+.titel-2 { font: var(--m-text-titel-2-gewicht) var(--m-text-titel-2-groesse)/var(--m-text-titel-2-zeilenhoehe) var(--m-text-titel-2-familie); letter-spacing: var(--m-text-titel-2-laufweite, normal); }
+.titel-3 { font: var(--m-text-titel-3-gewicht, var(--m-text-titel-2-gewicht)) var(--m-text-titel-3-groesse, var(--m-text-titel-2-groesse))/var(--m-text-titel-3-zeilenhoehe, 1.25) var(--m-text-titel-3-familie, var(--m-schrift-titel)); }
+.lead { font-size: var(--m-text-lead-groesse); line-height: var(--m-text-lead-zeilenhoehe); color: var(--m-farbe-text-leise); margin: 0; text-wrap: pretty; }
+.klein { font-size: var(--m-text-klein-groesse); line-height: var(--m-text-klein-zeilenhoehe); }
+.label { font: var(--m-text-label-gewicht) var(--m-text-label-groesse)/var(--m-text-label-zeilenhoehe) var(--m-text-label-familie); letter-spacing: var(--m-text-label-laufweite, normal); text-transform: var(--m-text-label-versalien, none); }
+
+/* Handlungen */
+.knopf {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5em;
+  min-height: 44px; padding: 0 1.25em; border-radius: var(--m-radius-steuerung);
+  font: var(--m-text-fliesstext-gewicht) var(--m-text-klein-groesse, 1rem)/1.2 var(--m-schrift-text);
+  font-weight: 600; text-decoration: none; border: 1px solid transparent;
+  transition: background-color var(--m-dauer-kurz) var(--m-kurve-standard), color var(--m-dauer-kurz) var(--m-kurve-standard);
+}
+.knopf-primaer { background: var(--m-farbe-handlung); color: var(--m-farbe-handlung-text); }
+.knopf-primaer:hover { background: var(--m-farbe-handlung-hover); }
+.knopf-zweit { background: transparent; color: var(--m-farbe-text); border-color: var(--m-farbe-linie-stark); }
+.knopf:focus-visible, a:focus-visible { outline: 2px solid var(--m-farbe-fokus); outline-offset: 2px; }
+.weiter { font-weight: 600; text-decoration: none; }
+
+/* Flächen */
+.karte { background: var(--m-farbe-flaeche); border: 1px solid var(--m-farbe-linie); border-radius: var(--m-radius-karte); padding: var(--m-abstand-4, 24px); }
+.flaeche-akzent { background: var(--m-farbe-flaeche-akzent, var(--m-farbe-flaeche)); }
+
+/* Signatur: Platz für das Signatur-Element der Marke, gestaltet in der markeneigenen CSS */
+.signatur { position: relative; }
+
+/* Blindtest: Logo, Name und Claim ausblenden (Klasse am html-Element oder ?blindtest=1) */
+.blindtest .logo, .blindtest [data-marke] { visibility: hidden; }
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }

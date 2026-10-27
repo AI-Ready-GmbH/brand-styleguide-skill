@@ -1,0 +1,8 @@
+# Testläufe, Snapshots, Prüfseiten: nur lokal (K6)
+skill/brand-styleguide-workspace/
+# Erzeugt
+docs/KONZEPT.html
+dist/
+__pycache__/
+*.pyc
+.DS_Store

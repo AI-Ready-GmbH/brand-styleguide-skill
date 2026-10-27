@@ -1,0 +1,37 @@
+/*
+ * Vorlage für einen Signatur-Baustein der Marke (Guide 7.x). Nicht direkt einbinden.
+ *
+ * So legst du einen an (P6, je Signatur-Element aus Guide 7 höchstens ein Baustein, insgesamt 1–3):
+ * 1. Datei kopieren nach components/ui/<name>.tsx, Name in der Sprache der Marke (z. B. „faden“, „stempel“).
+ * 2. Aufgabe, Grenze und Herleitung aus Guide 7.x wörtlich in den JSDoc übernehmen. Ohne Herleitung kein Baustein.
+ * 3. Optik nur aus Tokens: Token-Klassen (bg-akzent, rounded-karte, font-titel, text-label …) oder var(--m-…)
+ *    in marke.css unter [data-baustein="<name>"]. Keine Hex-, rgba- oder hsl-Werte, keine freien Größen,
+ *    Radien oder Dauern. Fehlt ein Wert, kommt er als Token in tokens.json, nicht in diese Datei.
+ * 4. Die Grenze, wo es geht, im Code durchsetzen (z. B. Prop-Typ statt freier Zahl, höchstens n Einträge).
+ * 5. Bewegung nur mit Dauer- und Kurven-Token, nur transform und opacity, bei prefers-reduced-motion still
+ *    (motion-reduce:…). Läuft sie länger als 5 Sekunden neben Inhalt, braucht sie Pause oder Stopp.
+ * 6. Zugänglichkeit: rein schmückend → aria-hidden="true"; trägt eine Aussage → Text-Alternative.
+ *    Bedienbar → Button oder Link als Kern, Fokus sichtbar in der Rolle fokus, 44 px Trefferfläche.
+ * 7. 'use client' nur, wenn der Baustein Zustand oder Browser-APIs braucht (z. B. IntersectionObserver).
+ * 8. In index.ts exportieren, in DESIGN.md unter Components eintragen, Leitplanken laufen lassen.
+ *
+ * Danach diesen Kommentarblock löschen.
+ */
+import type {ReactNode} from 'react'
+
+/**
+ * {{Name}} · Signatur-Element · Guide 7.{{n}}
+ *
+ * Aufgabe: {{was das Element für Leser leistet, ein Satz, z. B. „führt den Blick von der Frage zur Antwort“}}
+ * Grenze: {{als Zahl und Ort, z. B. „höchstens einmal je Seite, nie im Seitenkopf, nie neben dem Primärbutton“}}
+ * Herleitung: {{Material der Marke mit Fundstelle: Logoform, Herkunft, Produkt, Sprache oder Bestand [F…] / Entscheidung [W…] [S…]}}
+ * Bewegung: {{keine | Dauer-Token und Kurve-Token, was sich bewegt}}; bei reduzierter Bewegung still.
+ * Zugänglichkeit: {{dekorativ (aria-hidden) | Aussage mit Text-Alternative}}
+ */
+export function {{Name}}({children, className}: {children?: ReactNode; className?: string}) {
+  return (
+    <div data-baustein="{{name}}" className={[/* MARKE: nur Token-Klassen */ '', className].filter(Boolean).join(' ')}>
+      {children}
+    </div>
+  )
+}

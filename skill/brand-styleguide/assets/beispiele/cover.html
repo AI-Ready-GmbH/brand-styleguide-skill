@@ -1,0 +1,35 @@
+<!doctype html>
+<!--
+  Cover eines Druckstücks, A4 hoch (Anwendungsbeispiel, nur wenn Modul Druck gewählt ist).
+  Kopie nach <lauf>/beispiele/cover.html, {{…}} ersetzen, Gestaltung in <lauf>/beispiele/marke.css
+  (Klassen .cover-druck, .cover-titel, .cover-unterzeile, .cover-logo, .signatur). Druckwerte aus ../tokens/druck.css.
+  Rendern: python3 scripts/render.py png <lauf>/beispiele/cover.html <lauf>/beispiele/cover.png --breite 1240 --hoehe 1754
+  Als PDF: python3 scripts/render.py pdf <lauf>/beispiele/cover.html <lauf>/beispiele/cover.pdf
+-->
+<html lang="de" data-modus="{{MODUS}}">
+<head>
+<meta charset="utf-8">
+<title>{{MARKE}} · Cover</title>
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="../tokens/druck.css">
+<link rel="stylesheet" href="basis.css">
+<link rel="stylesheet" href="marke.css">
+<style>
+  @page { size: A4; margin: 0; }
+  html, body { width: 210mm; height: 297mm; overflow: hidden; }
+  .cover-druck { position: relative; width: 100%; height: 100%; padding: 18mm; display: flex; flex-direction: column; justify-content: space-between; }
+  .cover-logo img { height: 12mm; width: auto; }
+</style>
+</head>
+<body>
+<main class="cover-druck signatur">
+  <div class="cover-logo logo"><img src="{{LOGO}}" alt="{{MARKE}}"></div>
+  <div>
+    <span class="label">{{ART}}</span>
+    <h1 class="display cover-titel">{{TITEL}}</h1>
+    <p class="lead cover-unterzeile">{{UNTERZEILE}}</p>
+  </div>
+  <p class="klein">{{FUSS}}</p>
+</main>
+</body>
+</html>
